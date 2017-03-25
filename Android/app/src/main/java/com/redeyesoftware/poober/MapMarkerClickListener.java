@@ -12,12 +12,14 @@ import com.google.android.gms.maps.model.Marker;
 
 public class MapMarkerClickListener implements GoogleMap.OnInfoWindowClickListener {
 
+    public static PooPostData poo;
+
     @Override
     public void onInfoWindowClick(Marker marker) {
-        PooPostData data = (PooPostData) marker.getTag();
-        Log.d("DEBUG:", data.getMoney());
+        poo = (PooPostData) marker.getTag();
+        Log.d("DEBUG:", poo.getMoney());
 
-        if (data.getPic().equals("")) {
+        if (poo.getPic().equals("")) {
             Intent newActivity = new Intent(MainActivity.me, PickPooActivity.class);
             MainActivity.me.startActivity(newActivity);
         } else {

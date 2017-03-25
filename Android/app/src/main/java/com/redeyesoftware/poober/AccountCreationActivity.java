@@ -1,5 +1,6 @@
 package com.redeyesoftware.poober;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.design.widget.FloatingActionButton;
@@ -112,8 +113,11 @@ public class AccountCreationActivity extends AppCompatActivity {
     }
 
     public void OnButtonClick(View view){
-        view.animate();
+        //view.animate();
         Log.d("DEBUG", passwordText.toString());
+
+        Intent startMain = new Intent(this, MainActivity.class);
+        startActivity(startMain);
         //do stuff
     }
 

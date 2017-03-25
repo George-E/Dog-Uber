@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PickPooActivity extends AppCompatActivity {
 
@@ -20,6 +21,9 @@ public class PickPooActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_poo);
+
+        ((TextView) this.findViewById(R.id.blurbLable)).setText(MapMarkerClickListener.poo.getDesc());
+        ((TextView) this.findViewById(R.id.moneyLable)).setText(MapMarkerClickListener.poo.getMoney());
 
         this.imageView = (ImageView)this.findViewById(R.id.pooSelfie);
 
@@ -45,9 +49,10 @@ public class PickPooActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: send picture
                 Log.d("DEBUG", "post request");
+                //NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
                 NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
+
                 finish();
             }
         });

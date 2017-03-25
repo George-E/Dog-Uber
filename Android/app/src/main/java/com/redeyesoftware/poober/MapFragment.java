@@ -1,6 +1,7 @@
 package com.redeyesoftware.poober;
 
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -20,7 +24,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment  {
+
+
+    public static MapFragment me;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -34,11 +41,14 @@ public class MapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
     }
 
     //returns what goes inside the fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        me = this;
 
         Log.v("DEBUG:","Map Frag Started");
 
@@ -60,23 +70,21 @@ public class MapFragment extends Fragment {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
+
+
                 // For showing a move to my location button
                 //googleMap.setMyLocationEnabled(true);
 
+
+
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
+                LatLng shopify = new LatLng(43.463968, -80.525226);
 
-
-                Marker m = googleMap.addMarker(new MarkerOptions()
-                        .position(sydney)
-                        .title("$15.00")
-                        .snippet("Help me plz")
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
-                );
-                m.setTag(new PooPostData("444",3,3,"Help!","$4.00",""));
+                Log.d("DEBUG","request sent");
+                NetworkingUtility.getPoops("/poomaster", new String[]{"time","price","description","longitude","latitude","picture"}, "fillMap");
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(shopify).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 //googleMap.setOnMarkerClickListener(new MapMarkerClickListener());
@@ -109,6 +117,40 @@ public class MapFragment extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+
+    public void addMapMarkers() {
+
+        Log.d("DEBUG","request finished");
+
+        for (int i = 0; i < NetworkingUtility.comments.length; i++) {
+            //Log.d("long timsetamp",NetworkingUtility.comments[i][3]);
+
+            //"time","price","description","longitude","latitude","picture"
+
+            String time = NetworkingUtility.comments[i][0];
+            double lat = Double.parseDouble(NetworkingUtility.comments[i][4]);
+            double lon = Double.parseDouble(NetworkingUtility.comments[i][3]);
+            String desc = NetworkingUtility.comments[i][2];
+            String money = NetworkingUtility.comments[i][1];
+            String pic = NetworkingUtility.comments[i][5];
+
+            LatLng pos = new LatLng(lat, lon);
+
+            Marker m = googleMap.addMarker(new MarkerOptions()
+                    .position(pos)
+                    .title(money)
+                    .snippet("Click to Pick!")
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
+            );
+            m.setTag(new PooPostData(time,lat,lon,desc,money,pic));
+
+
+           // CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(12).build();
+           // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
+
     }
 
 

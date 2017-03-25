@@ -27,8 +27,7 @@ public class NetworkingUtility {
 
     public static String url = "http://74.201.57.189:81/poober";
     public static RequestQueue queue;
-    public static String response;
-    //Todo: make private; use getters
+
     public static String comments[][];
 
     public static void setUpRequestQueue(MainActivity parentActivity) {
@@ -36,91 +35,63 @@ public class NetworkingUtility {
     }
 
     private static void callMethodOnFinished(String key) {
-        /*switch (key) {
-            case "fillFeed":
-                RefreshableScrollView.addCommentsToFeed(false, false, false, false);
+        switch (key) {
+            case "fillMap":
+                MapFragment.me.addMapMarkers();
                 return;
-            case "addMoreToFeed":
+            /*case "addMoreToFeed":
                 RefreshableScrollView.addCommentsToFeed(true, false, false, false);
-                return;
-            case "fillChat":
-                RefreshableScrollView.addCommentsToFeed(false, true, false, false);
-                return;
-            case "fillChatBefore":
-                RefreshableScrollView.addCommentsToFeed(false, true, false, true);
-                return;
-            case "fillChatThenAddMore":
-                RefreshableScrollView.addCommentsToFeed(false, true ,true, false);
-                return;
-            case "addMoreToChat":
-                RefreshableScrollView.addCommentsToFeed(true, true, false, false);
-                return;
-            case "fillTiva":
-                BluetoothActivity.sendCommentsToTiva();
-                return;
-            case "updateBookmarkFromBluetooth":
-                BluetoothActivity.updateBookmarkFromBluetooth();
-                return;
-        }*/
+                return;*/
+        }
     }
 
-    public static void getComments(final String urlEnd, final String token, final boolean forward, final int max_messages, final int min_messages, final String group_id, final String start, final String methodKey, final String[] tags) {
+    public static void getPoops(final String urlEnd, final String[] tags, final String methodKey) {
         comments = null;//if not rewritten, will send back empty array
 
-        String newUrl = url + urlEnd + "?max_messages=" + ((forward)?"":"-") + max_messages + "&group_id=" + group_id + "&access_token="+token ;
-        if (!start.equals("")) {
-            newUrl += "&start="+start;
-        }
-       // Log.d("Sending to this url", newUrl);
-        // Request a string response from the provided URL.
-        JsonArrayRequest req = new JsonArrayRequest(newUrl,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Log.d("The JSON was:", response.toString());
-                        //changed to below b/c messages exceed max length of roughly 4000 chars
+        String newUrl = url + urlEnd;
 
-                        /*if (response.toString().length() > 4000) {
-                            int chunkCount = response.length() / 4000;     // integer division
-                            for (int i = 0; i <= chunkCount+1; i++) {
-                                int max = 4000 * (i + 1);
-                                if (max >= response.length()) {
-                                    Log.v("The JSON was:", "chunk " + i + " of " + chunkCount + ":" + response.toString().substring(4000 * i));
-                                } else {
-                                    Log.v("The JSON was:", "chunk " + i + " of " + chunkCount + ":" + response.toString().substring(4000 * i, max));
-                                }
-                            }
-                        } else {
-                            Log.v("The JSON was:", response.toString());
-                        }*/
+
+        // Log.d("Sending to this url", newUrl);
+        // Request a string response from the provided URL.
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, newUrl, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
 
                         try {
-                            if (max_messages >= 60 || response.length()>= min_messages) {
-                                Log.d("Debug","Got enough nondeleted messages.. asked for " + max_messages + " got " + response.length());
-                                comments = new String[response.length()][tags.length];
-                                // Parsing json array response, loop through each json object
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject comment = response.getJSONObject(i);
-                                    for (int j = 0; j < tags.length; j++) {
-                                        comments[i][j] = comment.getString(tags[j]).replaceAll("\\uFFFD","");
-                                    }
+                            comments = new String[response.length()][tags.length];
+                            for(int i = 0; i<response.names().length(); i++){
+                                JSONObject poo = response.getJSONObject(response.names().getString(i));
+
+                                for (int j = 0; j < tags.length; j++) {
+                                    comments[i][j] = poo.getString(tags[j]).replaceAll("\\uFFFD","");
                                 }
-                                callMethodOnFinished(methodKey);
-                            } else {
-                                //keeps asking for 10 more until a maximum max of 60
-                                getComments(urlEnd, token, forward, max_messages+10, min_messages, group_id, start, methodKey, tags);
-                                Log.d("Debug","Not enough nondeleted messages.. asked for " + max_messages + " got " + response.length() + " ... asking for " + (max_messages+10)+ " now");
                             }
+                            callMethodOnFinished(methodKey);
 
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.d("Debug", "Error: " + e.getMessage());
                         }
+
+
+
+
+                        /*Log.i(TAG,response.toString());
+                        try{
+                            JSONObject value = response.getJSONObject("label");
+                            String essai = value.getString("pers_nom");
+                            Toast.makeText(getActivity(), ""+essai, Toast.LENGTH_SHORT).show();
+                            Log.d("volley output", essai);
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }*/
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Debug", "Error with Volley Get");
+                Log.d("Debug", "Error with Volley Get" +  error);
             }
         });
 

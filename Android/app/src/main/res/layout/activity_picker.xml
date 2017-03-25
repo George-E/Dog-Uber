@@ -35,20 +35,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
-        android:layout_alignLeft="@+id/DenyButton"
-        android:layout_marginLeft="150dp"/>
+        android:layout_alignStart="@+id/pooSelfie" />
     <Button
         android:id="@+id/DenyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Deny"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="false"
-        android:layout_marginBottom="22dp"
-        android:layout_marginLeft="75dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_alignBaseline="@+id/AcceptButton"
+        android:layout_alignBottom="@+id/AcceptButton"
+        android:layout_alignEnd="@+id/pooSelfie" />
 
     <ImageButton
         android:id="@+id/closeButton"

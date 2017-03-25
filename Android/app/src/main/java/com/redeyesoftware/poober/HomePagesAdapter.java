@@ -32,7 +32,7 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -40,10 +40,8 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
         Log.d("DEBUG:","page adaptor providing frag num "+position);
         switch (position) {
             case 0:
-                return new Fragment();
-            case 1:
                 return new MapFragment();
-            case 2:
+            case 1:
                 return new Fragment();
             default:
                 return null;
@@ -54,11 +52,9 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Feed";
-            case 1:
                 return "Map";
-            case 2:
-                return "My Poo";
+            case 1:
+                return "Poo Selfies";
             default:
                 return null;
         }

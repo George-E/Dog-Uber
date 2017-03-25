@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -45,7 +46,8 @@ public class PickPooActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: send picture
-                NetworkingUtility.post("/addpoo", new String[]{"time,","price","description","longitude","latitude"}, new String[]{"555","$5.00","Yolo","40","50"});
+                Log.d("DEBUG", "post request");
+                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
                 finish();
             }
         });

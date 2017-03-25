@@ -6,11 +6,14 @@ package com.redeyesoftware.poober;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -195,7 +198,42 @@ public class NetworkingUtility {
         // Request a string response from the provided URL.
         String newUrl = url + urlEnd;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, newUrl,
+
+        Map<String, String> postParam= new HashMap<String, String>();
+        for (int i =0; i<keys.length;i++ ) {
+            postParam.put(keys[i], values[i]);
+        }
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.POST, newUrl, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Debug", "Response to post is: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Debug", "Error with Volley Post");
+
+                    }
+                }) {
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        return headers;
+                    }
+
+        };
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest);
+
+
+        /*StringRequest stringRequest = new StringRequest(Request.Method.POST, newUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -207,6 +245,14 @@ public class NetworkingUtility {
                 Log.d("Debug", "Error with Volley Post");
             }
         }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -217,7 +263,10 @@ public class NetworkingUtility {
             }
 
         };
+
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        queue.add(stringRequest);*/
+
+
     }
 }

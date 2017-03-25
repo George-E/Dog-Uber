@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         me = this;
+        NetworkingUtility.setUpRequestQueue(this);
 
         /*Button mapView =  (Button) findViewById(R.id.mapView);
 

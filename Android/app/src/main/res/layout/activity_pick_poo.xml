@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
+        android:textColor="@color/black"
+        android:textSize="40dp"
         android:text="$15.00" />
 
     <TextView
@@ -21,6 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView"
         android:layout_marginTop="28dp"
+        android:textColor="@color/black"
         android:text="Help me please." />
 
     <Button
@@ -30,14 +33,37 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
-        android:text="Button" />
+        android:text="Take a Poo Selfie" />
 
     <ImageView
+        android:background="@drawable/picture_border"
         android:id="@+id/pooSelfie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/selfieButton"
         android:layout_marginTop="28dp"
-        app:srcCompat="?android:attr/listChoiceIndicatorSingle" />
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="100dp"/>
+
+    <Button
+        android:id="@+id/submitClaimButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp" />
+
+    <ImageButton
+        android:id="@+id/closeButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp" />
+
 </RelativeLayout>

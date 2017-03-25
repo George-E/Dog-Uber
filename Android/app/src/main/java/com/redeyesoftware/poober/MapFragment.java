@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -67,7 +68,7 @@ public class MapFragment extends Fragment {
                         .position(sydney)
                         .title("Poo Help!")
                         .snippet("Offer: $15")
-                        //.icon()
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
                 );
 
                 // For zooming automatically to the location of the marker

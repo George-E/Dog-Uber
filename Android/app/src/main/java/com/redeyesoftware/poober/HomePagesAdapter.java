@@ -37,26 +37,17 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Bundle args;
-        /*switch (position) {
+        Log.d("DEBUG:","page adaptor providing frag num "+position);
+        switch (position) {
             case 0:
-                FeedFragment feed = new FeedFragment();
-                args = new Bundle();
-                args.putBoolean("isChat", false);
-                feed.setArguments(args);
-                return feed;
+                return new Fragment();
             case 1:
-                FeedFragment chat = new FeedFragment();
-                args = new Bundle();
-                args.putBoolean("isChat", true);
-                chat.setArguments(args);
-                return chat;
+                return new MapFragment();
             case 2:
-                return new BookmarksFragment();
+                return new Fragment();
             default:
                 return null;
-        }*/
-        return new Fragment();
+        }
     }
 
     @Override

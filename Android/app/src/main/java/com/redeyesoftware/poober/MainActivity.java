@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
@@ -30,17 +31,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+
         mFragPagerAdapter = new HomePagesAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mFragPagerAdapter);
-        /*mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageSelected(int index) {updateFragments();}
+            public void onPageSelected(int index) {
+                //updateFragments();
+                //getActionBar().setSelectedNavigationItem(index);
+            }
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {}
             @Override
             public void onPageScrollStateChanged(int arg0) {}
-        });*/
+        });
 
         //the below wouldnt be necessary if tablayout was defined inside the view pager in the xml
         //in this case, instead, it is part of the toolbar to create  cleaner app bar
@@ -55,5 +60,9 @@ public class MainActivity extends AppCompatActivity {
         // The options menu initially contains just the Settings item.
 
 
+    }
+
+    public static void updateFragments() {
+        mFragPagerAdapter.notifyDataSetChanged();
     }
 }

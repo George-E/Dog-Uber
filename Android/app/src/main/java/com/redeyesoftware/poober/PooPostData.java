@@ -14,7 +14,6 @@ public class PooPostData {
 
 
     public PooPostData(String time, double lat, double lon, String desc, String money, String pic) {
-
         this.time = time;
         this.lat = lat;
         this.lon = lon;

@@ -17,6 +17,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment {
@@ -64,16 +65,22 @@ public class MapFragment extends Fragment {
 
                 // For dropping a marker at a point on the Map
                 LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions()
+
+
+                Marker m = googleMap.addMarker(new MarkerOptions()
                         .position(sydney)
-                        .title("Poo Help!")
-                        .snippet("Offer: $15")
+                        .title("$15.00")
+                        .snippet("Help me plz")
                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
                 );
+                m.setTag(new PooPostData("444",3,3,"Help!","$4.00",""));
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                //googleMap.setOnMarkerClickListener(new MapMarkerClickListener());
+                googleMap.setOnInfoWindowClickListener(new MapMarkerClickListener());
             }
         });
 

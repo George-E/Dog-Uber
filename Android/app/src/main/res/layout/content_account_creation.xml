@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="115dp"
         android:layout_above="@+id/PasswordBox"
         android:layout_alignStart="@+id/PasswordBox"
-        android:layout_marginBottom="21dp" />
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/PasswordBox"
@@ -31,19 +31,19 @@
         tools:layout_editor_absoluteY="180dp"
         android:layout_above="@+id/ConfirmPasswordBox"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp" />
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/ConfirmPasswordBox"
         android:layout_width="289dp"
         android:layout_height="43dp"
+        android:layout_alignStart="@+id/PasswordBox"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="textPassword"
         tools:hint="Confirm Password"
         tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="245dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/PasswordBox" />
+        tools:layout_editor_absoluteY="245dp" />
 
     <Button
         android:id="@+id/Confirm"
@@ -56,9 +56,10 @@
         android:visibility="visible"
         tools:layout_editor_absoluteX="140dp"
         tools:layout_editor_absoluteY="307dp"
-        android:layout_below="@+id/ConfirmPasswordBox"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:onClick="OnButtonClick"/>
 
     <TextView
         android:id="@+id/Title"
@@ -93,5 +94,73 @@
         tools:layout_editor_absoluteY="16dp"
         android:layout_alignTop="@+id/Title"
         android:layout_alignEnd="@+id/Title" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/UserSelector"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:checkedButton="@+id/radioButton1">
+
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:duplicateParentState="false"
+            android:text="Pooper"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:buttonTint="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/radioButton1"
+            android:layout_below="@+id/UserSelector"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:duplicateParentState="true"
+            android:text="Scooper"
+            app:buttonTint="@color/colorPrimaryDark" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/UserSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ConfirmPasswordBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Pick Your Role"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/UsernameBox"
+        android:layout_alignStart="@+id/UsernameBox"
+        android:text="Username" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/PasswordBox"
+        android:layout_alignStart="@+id/UsernameBox"
+        android:text="Password" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ConfirmPasswordBox"
+        android:layout_alignStart="@+id/UsernameBox"
+        android:text="Confirm Password" />
 
 </RelativeLayout>

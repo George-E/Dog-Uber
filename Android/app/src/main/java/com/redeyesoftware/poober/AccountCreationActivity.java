@@ -1,12 +1,14 @@
 package com.redeyesoftware.poober;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,9 +70,10 @@ public class AccountCreationActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(passwordText.length() <= MinNameLength){
+                if(passwordText.length() < MinNameLength){
                     passwordText.setError("Minimum length is " + MinNameLength + " characters!");
                 }
+
             }
         });
         confirmPasswordText.addTextChangedListener(new TextWatcher() {
@@ -86,30 +89,32 @@ public class AccountCreationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(confirmPasswordText.getText().toString() != passwordText.getText().toString()){
+
+                if(!confirmPasswordText.getText().toString().equals(passwordText.getText().toString())){
                     confirmPasswordText.setError("Passwords Must Match");
                 }
             }
         });
 
-
-
         //submit button
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        /*submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //save all of the stuff entered
                 username = usernameText.getText().toString();
                 password = passwordText.getText().toString();
-
-                if (username.length() >= MinNameLength && password.length() >= MinNameLength){
-                    if(password == confirmPasswordText.getText().toString()){
-                        //do stuff
-                    }
-                }
+                Log.d("DEBUG1", passwordText.toString());
 
             }
-        });
+        });*/
+
+
+    }
+
+    public void OnButtonClick(View view){
+        view.animate();
+        Log.d("DEBUG", passwordText.toString());
+        //do stuff
     }
 
 

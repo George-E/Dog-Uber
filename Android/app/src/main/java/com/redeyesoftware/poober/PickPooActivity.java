@@ -22,8 +22,11 @@ public class PickPooActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_poo);
 
-        ((TextView) this.findViewById(R.id.blurbLable)).setText(MapMarkerClickListener.poo.getDesc());
-        ((TextView) this.findViewById(R.id.moneyLable)).setText(MapMarkerClickListener.poo.getMoney());
+        TextView blr =((TextView) this.findViewById(R.id.blurbLable));
+        TextView mon =((TextView) this.findViewById(R.id.moneyLable));
+
+        blr.setText(MapMarkerClickListener.poo.getDesc());
+        mon.setText(MapMarkerClickListener.poo.getMoney());
 
         this.imageView = (ImageView)this.findViewById(R.id.pooSelfie);
 

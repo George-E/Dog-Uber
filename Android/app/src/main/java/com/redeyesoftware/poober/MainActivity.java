@@ -13,6 +13,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static MainActivity  me;
+
     private static HomePagesAdapter mFragPagerAdapter;
     private static ViewPager mViewPager;
 
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        me = this;
 
         /*Button mapView =  (Button) findViewById(R.id.mapView);
 

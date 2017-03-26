@@ -23,7 +23,8 @@ public class MapMarkerClickListener implements GoogleMap.OnInfoWindowClickListen
             Intent newActivity = new Intent(MainActivity.me, PickPooActivity.class);
             MainActivity.me.startActivity(newActivity);
         } else {
-
+            Intent newActivity = new Intent(MainActivity.me, PickerActivity.class);
+            MainActivity.me.startActivity(newActivity);
         }
     }
 }

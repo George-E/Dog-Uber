@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +13,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+
 public class PickPooActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
+
+    private String picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class PickPooActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("DEBUG", "post request");
                 //NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
-                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
+                NetworkingUtility.post("/addpic", new String[]{"time","picture"},new String[]{MapMarkerClickListener.poo.getTime(),picture});
 
                 finish();
             }
@@ -66,6 +71,16 @@ public class PickPooActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
+            picture= BitMapToString(photo);
         }
+    }
+
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 }

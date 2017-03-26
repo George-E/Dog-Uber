@@ -42,7 +42,7 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
             case 0:
                 return new MapFragment();
             case 1:
-                return new Fragment();
+                return new PooSelfiesFragment();
             default:
                 return null;
         }

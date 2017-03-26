@@ -20,7 +20,7 @@
 
     <ImageView
         android:background="@drawable/picture_border"
-        android:id="@+id/pooSelfie"
+        android:id="@+id/pooSelfie2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"

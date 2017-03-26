@@ -2,6 +2,7 @@ package com.redeyesoftware.poober;
 
 import android.content.Intent;
 import android.location.Location;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -35,15 +36,17 @@ public class MainActivity extends AppCompatActivity {
         NetworkingUtility.setUpRequestQueue(this);
 
 
-        /*Button mapView =  (Button) findViewById(R.id.mapView);
+        FloatingActionButton makepoo =  (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
-        mapView.setOnClickListener(new View.OnClickListener() {
+        makepoo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent newActivity = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(newActivity);
+                //Intent newActivity = new Intent(MainActivity.this, MapsActivity.class);
+                //startActivity(newActivity);
+                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
+
             }
-        });*/
+        });
 
 
         mFragPagerAdapter = new HomePagesAdapter(getSupportFragmentManager());

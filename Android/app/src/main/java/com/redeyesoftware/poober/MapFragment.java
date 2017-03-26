@@ -1,10 +1,13 @@
 package com.redeyesoftware.poober;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,12 +141,22 @@ public class MapFragment extends Fragment  {
 
             LatLng pos = new LatLng(lat, lon);
 
-            Marker m = googleMap.addMarker(new MarkerOptions()
-                    .position(pos)
-                    .title(money)
-                    .snippet("Click to Pick!")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
-            );
+            Marker m;
+            if (pic.equals("")) {
+                m = googleMap.addMarker(new MarkerOptions()
+                        .position(pos)
+                        .title(money)
+                        .snippet("Click to Pick!")
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.poop_emoji))
+                );
+            } else {
+                m = googleMap.addMarker(new MarkerOptions()
+                        .position(pos)
+                        //.title(money)
+                        .snippet("Click to Verify!")
+                        .icon(BitmapDescriptorFactory.fromBitmap(StringToBitMap(pic)))
+                );
+            }
             m.setTag(new PooPostData(time,lat,lon,desc,money,pic));
 
 
@@ -151,6 +164,17 @@ public class MapFragment extends Fragment  {
            // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
 
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 

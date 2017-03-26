@@ -61,6 +61,8 @@ public class PickPooActivity extends AppCompatActivity {
                 //NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
                 NetworkingUtility.post("/addpic", new String[]{"time","picture"},new String[]{MapMarkerClickListener.poo.getTime(),picture});
 
+
+                MainActivity.updateFragments();
                 finish();
             }
         });

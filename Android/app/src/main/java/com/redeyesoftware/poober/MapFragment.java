@@ -87,7 +87,7 @@ public class MapFragment extends Fragment  {
                 NetworkingUtility.getPoops("/poomaster", new String[]{"time","price","description","longitude","latitude","picture"}, "fillMap");
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(shopify).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(shopify).zoom(14).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 //googleMap.setOnMarkerClickListener(new MapMarkerClickListener());

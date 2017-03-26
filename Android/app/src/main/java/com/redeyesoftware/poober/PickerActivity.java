@@ -34,7 +34,7 @@ public class PickerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //DOES WHAT EVER IS NECESSARY NETWORKING WISE
                 NetworkingUtility.post("/deletepoo", new String[]{"time"},new String[]{MapMarkerClickListener.poo.getTime()});
-
+                MainActivity.updateFragments();
                 finish();
             }
         });

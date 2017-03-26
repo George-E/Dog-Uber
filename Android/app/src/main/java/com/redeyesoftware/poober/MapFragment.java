@@ -152,7 +152,7 @@ public class MapFragment extends Fragment  {
             } else {
                 m = googleMap.addMarker(new MarkerOptions()
                         .position(pos)
-                        //.title(money)
+                        .title("POO PICKED")
                         .snippet("Click to Verify!")
                         .icon(BitmapDescriptorFactory.fromBitmap(StringToBitMap(pic)))
                 );

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 //Intent newActivity = new Intent(MainActivity.this, MapsActivity.class);
                 //startActivity(newActivity);
-                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"555","$5.00","Yolo","40","50",""});
+                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"55555","$5.00","From my shit-zu", "-80.525226","43.463968",""});
 
             }
         });

@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView"
         android:layout_marginTop="28dp"
         android:textColor="@color/black"
         android:text="Is This Your Poo?" />
@@ -37,7 +36,7 @@
         android:text="Confirm"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/pooSelfie" />
+        android:layout_toEndOf="@+id/textView2" />
     <Button
         android:id="@+id/DenyButton"
         android:layout_width="wrap_content"
@@ -46,7 +45,7 @@
         android:layout_marginRight="10dp"
         android:layout_alignBaseline="@+id/AcceptButton"
         android:layout_alignBottom="@+id/AcceptButton"
-        android:layout_alignEnd="@+id/pooSelfie" />
+        android:layout_alignStart="@+id/pooSelfie2" />
 
     <ImageButton
         android:id="@+id/closeButton"

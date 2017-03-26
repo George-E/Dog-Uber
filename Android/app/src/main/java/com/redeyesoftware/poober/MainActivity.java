@@ -1,6 +1,8 @@
 package com.redeyesoftware.poober;
 
 import android.content.Intent;
+import android.location.Location;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +13,16 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationServices;
+
+
 public class MainActivity extends AppCompatActivity {
+
+
+    public static MainActivity  me;
 
     private static HomePagesAdapter mFragPagerAdapter;
     private static ViewPager mViewPager;
@@ -21,15 +32,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Button mapView =  (Button) findViewById(R.id.mapView);
+        me = this;
+        NetworkingUtility.setUpRequestQueue(this);
 
-        mapView.setOnClickListener(new View.OnClickListener() {
+
+        FloatingActionButton makepoo =  (FloatingActionButton) findViewById(R.id.floatingActionButton);
+
+        makepoo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent newActivity = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(newActivity);
+                //Intent newActivity = new Intent(MainActivity.this, MapsActivity.class);
+                //startActivity(newActivity);
+                NetworkingUtility.post("/addpoo", new String[]{"time","price","description","longitude","latitude","picture"}, new String[]{"55555","$5.00","From my shit-zu", "-80.525226","43.463968",""});
+                updateFragments();
             }
-        });*/
+        });
+
+        FloatingActionButton refresh =  (FloatingActionButton) findViewById(R.id.floatingActionButton2);
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                 updateFragments();
+            }
+        });
 
 
         mFragPagerAdapter = new HomePagesAdapter(getSupportFragmentManager());
@@ -65,4 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public static void updateFragments() {
         mFragPagerAdapter.notifyDataSetChanged();
     }
+
+
+
 }
